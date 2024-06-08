@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+    margin-top: 250px;
+    
+}
+.container h1 {
+    font-size: 150px;
+    margin: 0;
+    color: red;
+}
+
+.container p {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.container a {
+    text-decoration: none;
+    color: #5eca04;
+    font-size: 1.2em;
+    border: 2px solid #5eca04;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container a:hover {
+    background-color: #5eca04;
+    color: #fff;
+}
