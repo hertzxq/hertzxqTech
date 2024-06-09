@@ -17,6 +17,14 @@ export default function Main({data}) {
                     <p className="price">149 000 ₽</p>
                     <a href="./main" className="btn">Купить сейчас</a>
                 </div>
+                
+                <div className="card">
+                    <img src={require('../img/videocard.jpeg')} alt="Videocard" />
+                    <h3>RTX 4090</h3>
+                    <p>Самая мощная видеокарта в мире</p>
+                    <p className="price">149 000 ₽</p>
+                    <a href="./main" className="btn">Купить сейчас</a>
+                </div>
                 <div className="card">
                     <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
                     <h3>Ryzen 9 5800X</h3>
@@ -42,61 +50,35 @@ export default function Main({data}) {
             </div>
         </div>
 
-        <div>
-            lol
-            {data.map((item, index) => (
-                <div key={index}>{item}</div>
-            ))} 
-        </div>
 
         <div className="news">
             <div className="news-content">
                 <h2>Новости</h2>
                 <p className="description">Последние обновления и новинки в мире технологий. Будьте в курсе самых важных событий и новостей.</p>
-                <div className="card-news">
+                <div className="product-cards">
                     <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p class="price">23 300 ₽</p>
+                        <img src={require('../img/videocard.jpeg')} alt="Videocard" />
+                        <h3>RTX 4090</h3>
+                        <p>Самая мощная видеокарта в мире</p>
+                        <p className="price">149 000 ₽</p>
                         <a href="./main" className="btn">Купить сейчас</a>
                     </div>
                     <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p className="price">23 300 ₽</p>
+                        <img src={require('../img/videocard.jpeg')} alt="Videocard" />
+                        <h3>RTX 4090</h3>
+                        <p>Самая мощная видеокарта в мире</p>
+                        <p className="price">149 000 ₽</p>
                         <a href="./main" className="btn">Купить сейчас</a>
                     </div>
+                    
                     <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p className="price">23 300 ₽</p>
+                        <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
+                        <h3>Ryzen 9 5800X</h3>
+                        <p>Самая быстрый процессор в мире.</p>
+                        <p className="price">56 800 ₽</p>
                         <a href="./main" className="btn">Купить сейчас</a>
                     </div>
-                    <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p className="price">23 300 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
-                    </div>
-                    <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p className="price">23 300 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
-                    </div>
-                    <div className="card">
-                        <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                        <h3>SK hynix</h3>
-                        <p>Самая быстрая память в мире.</p>
-                        <p className="price">23 300 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
-                    </div>
-                </div>
+            </div>
             </div>
         </div>
     </main>

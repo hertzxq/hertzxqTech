@@ -3,7 +3,9 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 220px;
 }
 
 .registration-title {
@@ -43,4 +45,13 @@
 
 .registration-form .form-button:hover {
     background-color: #218838;
+}
+
+.entrybtn {
+    text-decoration: none;
+    color: #28a745;
+    font-size: 16px;
+    &:hover {
+        color: #218838
+    }
 }

@@ -7,6 +7,10 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const checkRegister = () => {
+        console.log("Registered?");
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -23,10 +27,10 @@ export default function Register() {
 
     return (
         <div className="registration-container">
-            <h1 className="registration-title">Register</h1>
+            <h1 className="registration-title">Зарегистрироваться</h1>
             <form className="registration-form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username" className="form-label">Username</label>
+                    <label htmlFor="username" className="form-label">Имя пользователя</label>
                     <input
                         type="text"
                         id="username"
@@ -38,7 +42,7 @@ export default function Register() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email" className="form-label">Email</label>
+                    <label htmlFor="email" className="form-label">Почта</label>
                     <input
                         type="email"
                         id="email"
@@ -50,7 +54,7 @@ export default function Register() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password" className="form-label">Password</label>
+                    <label htmlFor="password" className="form-label">Пароль</label>
                     <input
                         type="password"
                         id="password"
@@ -62,7 +66,7 @@ export default function Register() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
+                    <label htmlFor="confirm-password" className="form-label">Подтвердите пароль</label>
                     <input
                         type="password"
                         id="confirm-password"
@@ -73,7 +77,8 @@ export default function Register() {
                         required
                     />
                 </div>
-                <button type="submit" className="form-button">Register</button>
+                <button type="submit" className="form-button" onClick={checkRegister}>Зарегистрироваться</button>
+                <span className='haveaccount'>Уже есть аккаунт? <a className='entrybtn' href="/login">Войдите</a></span>
             </form>
         </div>
     );

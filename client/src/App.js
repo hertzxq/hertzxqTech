@@ -4,6 +4,7 @@ import MainPage from './components/main/mainPage';
 import Profile from './components/profile/profile';
 import NotFound from './components/notFound/notFound';
 import Register from "./components/register/register"
+import Login from './components/login/login';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
     </>
