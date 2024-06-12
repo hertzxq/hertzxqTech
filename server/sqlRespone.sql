@@ -1,7 +1,7 @@
-CREATE TABLE users (
+CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id INTEGER REFERENCES users(id),
+    product VARCHAR(255),
+    price DECIMAL,
+    date TIMESTAMP DEFAULT NOW()
 );

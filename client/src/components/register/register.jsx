@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
-    const checkRegister = () => {
-        console.log("Registered?");
-    }
+    const checkRegister = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/checkUser', { username, email });
+            return response.data.exists;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            alert("Пароли не совпадают!");
             return;
         }
+
+        const userExists = await checkRegister();
+        if (userExists) {
+            alert("Пользователь уже существует!");
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5000/register', { username, email, password });
             console.log(response.data);
+            alert("Регистрация прошла успешно!");
+            navigate('/login'); 
         } catch (error) {
             console.error(error);
+            alert("Ошибка при регистрации. Попробуйте еще раз.");
         }
     };
 
@@ -77,7 +95,7 @@ export default function Register() {
                         required
                     />
                 </div>
-                <button type="submit" className="form-button" onClick={checkRegister}>Зарегистрироваться</button>
+                <button type="submit" className="form-button">Зарегистрироваться</button>
                 <span className='haveaccount'>Уже есть аккаунт? <a className='entrybtn' href="/login">Войдите</a></span>
             </form>
         </div>

@@ -78,6 +78,9 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.profile-content h1 {
+    margin-top: 35px;
+}
 
 .profile-details {
     display: flex;
@@ -138,17 +141,99 @@ main {
     border-radius: 5px;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
+.order-history-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn_leave {
+    margin-top: 200px;
+    width: 250px;
+    height: 40px;
+    display: block;
+    background-color: #5eca04;
     color: white;
+    text-align: center;
+    border: none;
+    border-radius: 15px;
     text-decoration: none;
-    border-radius: 5px;
     transition: background-color 0.3s;
+}
+
+.btn_leave:hover {
+    background-color: #75ee0f;
+}
+
+.order-history-title {
+    text-align: center;
+    color: #333;
+}
+
+.order-history-table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.order-history-table th, .order-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.order-history-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.order-history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-history-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 600px) {
+    .order-history-table, .order-history-table thead, .order-history-table tbody, .order-history-table th, .order-history-table td, .order-history-table tr {
+        display: block;
+    }
+
+    .order-history-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .order-history-table tr {
+        margin: 0 0 20px 0;
+    }
+
+    .order-history-table tr:nth-child(even) {
+        background-color: transparent;
+    }
+
+    .order-history-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .order-history-table td:before {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        transform: translateY(-50%);
+    }
+
+    .order-history-table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
 }

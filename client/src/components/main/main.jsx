@@ -15,7 +15,7 @@ export default function Main({data}) {
                     <h3>RTX 4090</h3>
                     <p>Самая мощная видеокарта в мире</p>
                     <p className="price">149 000 ₽</p>
-                    <a href="./main" className="btn">Купить сейчас</a>
+                    <a href="./productCard" className="btn">Купить сейчас</a>
                 </div>
                 
                 <div className="card">
@@ -23,21 +23,21 @@ export default function Main({data}) {
                     <h3>RTX 4090</h3>
                     <p>Самая мощная видеокарта в мире</p>
                     <p className="price">149 000 ₽</p>
-                    <a href="./main" className="btn">Купить сейчас</a>
+                    <a href="./productCard" className="btn">Купить сейчас</a>
                 </div>
                 <div className="card">
                     <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
                     <h3>Ryzen 9 5800X</h3>
                     <p>Самая быстрый процессор в мире.</p>
                     <p className="price">56 800 ₽</p>
-                    <a href="./main" className="btn">Купить сейчас</a>
+                    <a href="./productCard" className="btn">Купить сейчас</a>
                 </div>
                 <div className="card">
                     <img src={require('../img/ozu.jpeg')} alt="OZU" />
                     <h3>SK hynix</h3>
                     <p>Самая быстрая память в мире.</p>
                     <p className="price">23 300 ₽</p>
-                    <a href="./main" className="btn">Купить сейчас</a>
+                    <a href="./productCard" className="btn">Купить сейчас</a>
                 </div>
             </div>
         </div>
@@ -61,14 +61,14 @@ export default function Main({data}) {
                         <h3>RTX 4090</h3>
                         <p>Самая мощная видеокарта в мире</p>
                         <p className="price">149 000 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
+                        <a href="./productCard" className="btn">Купить сейчас</a>
                     </div>
                     <div className="card">
                         <img src={require('../img/videocard.jpeg')} alt="Videocard" />
                         <h3>RTX 4090</h3>
                         <p>Самая мощная видеокарта в мире</p>
                         <p className="price">149 000 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
+                        <a href="./productCard" className="btn">Купить сейчас</a>
                     </div>
                     
                     <div className="card">
@@ -76,7 +76,7 @@ export default function Main({data}) {
                         <h3>Ryzen 9 5800X</h3>
                         <p>Самая быстрый процессор в мире.</p>
                         <p className="price">56 800 ₽</p>
-                        <a href="./main" className="btn">Купить сейчас</a>
+                        <a href="./productCard" className="btn">Купить сейчас</a>
                     </div>
             </div>
             </div>

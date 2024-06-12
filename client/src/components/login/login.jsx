@@ -1,8 +1,35 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 export default function Login() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/login', { username, password });
+            const token = response.data.token;
+            console.log('Received token:', token);
+
+            // Сохраняем токен и информацию о пользователе в localStorage
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify({ username }));
+
+            alert("Вход выполнен успешно!");
+            navigate('/profile');
+        } catch (error) {
+            console.error('Login error:', error);
+            alert("Ошибка при входе. Проверьте имя пользователя и пароль.");
+        }
+    };
+
     return (
         <div className="registration-container">
             <h1 className="registration-title">Войти</h1>
-            <form className="registration-form">
+            <form className="registration-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username" className="form-label">Имя пользователя</label>
                     <input
@@ -10,16 +37,8 @@ export default function Login() {
                         id="username"
                         className="form-input"
                         name="username"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email" className="form-label">Почта</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="form-input"
-                        name="email"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
@@ -30,22 +49,14 @@ export default function Login() {
                         id="password"
                         className="form-input"
                         name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="confirm-password" className="form-label">Подтвердите пароль</label>
-                    <input
-                        type="password"
-                        id="confirm-password"
-                        className="form-input"
-                        name="confirm-password"
-                        required
-                    />
-                </div>
-                <button type="submit" className="form-button">Войдите</button>
-                <span className='haveaccount'>нет аккаунта? <a className='entrybtn' href="/register">Зарегистрироваться</a></span>
+                <button type="submit" className="form-button">Войти</button>
+                <span className='haveaccount'>Нет аккаунта? <a className='entrybtn' href="/register">Зарегистрироваться</a></span>
             </form>
         </div>
-    )
-}
+    );
+};

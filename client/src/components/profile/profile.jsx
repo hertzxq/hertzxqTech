@@ -1,35 +1,108 @@
-import Header from "../main/header"
-import Footer from "../main/footer"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Header from "../main/header";
+import Footer from "../main/footer";
 
 export default function Profile() {
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [username, setUsername] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                navigate('/login');
+                return;
+            }
+
+            try {
+                const response = await axios.get('http://localhost:5000/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                console.log('Profile data:', response.data);
+
+                // Сохраняем информацию о пользователе в localStorage
+                localStorage.setItem('user', JSON.stringify(response.data));
+
+                setProfileData(response.data);
+            } catch (error) {
+                console.error('Profile fetch error:', error);
+                setError('Ошибка при загрузке профиля. Пожалуйста, войдите снова.');
+                localStorage.removeItem('token');
+                navigate('/login');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfile();
+    }, [navigate]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    const handleLogout = () => {
+        // Удаляем токен и информацию о пользователе из localStorage
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUsername(null);
+        navigate('/');
+    };
+
     return (
-    <>
-    <Header />
-    <main>
-        <div className="profile-section">
-            <div className="profile-content">
-                <h1>Профиль пользователя</h1>
-                <div className="profile-details">
-                    <img src="./img/user-avatar.jpeg" alt="User Avatar" className="profile-avatar" />
-                    <div className="user-info">
-                        <p>Имя пользователя: Иван Иванов</p>
-                        <p>Email: ivan.ivanov@example.com</p>
-                        <p>Дата регистрации: 01.01.2020</p>
+        <>
+            <Header />
+            <main>
+                <div className="profile-section">
+                    <div className="profile-content">
+                        <h1>Профиль пользователя</h1>
+                        <div className="profile-details">
+                            <img src={require('../img/profile_avatar.jpg')} alt="User Avatar" className="profile-avatar" />
+                            <div className="user-info">
+                                <p>Имя пользователя: {profileData.username}</p>
+                                <p>Email: {profileData.email}</p>
+                            </div>
+                            <button className='btn_leave' onClick={handleLogout}>Выйти</button>
+                        </div>
                     </div>
                 </div>
-                <div className="order-history">
-                    <h2>История заказов</h2>
-                    <ul className="order-list">
-                        <li>Заказ #1: RTX 4090 - 149 000 ₽ - 01.03.2023</li>
-                        <li>Заказ #2: Ryzen 9 5800X - 56 800 ₽ - 15.04.2023</li>
-                        <li>Заказ #3: SK hynix - 23 300 ₽ - 23.05.2023</li>
-                    </ul>
+                <div className="order-history-container">
+                    <h1 className="order-history-title">История заказов</h1>
+                    <table className="order-history-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {profileData.orders && profileData.orders.map((order, index) => (
+                                <tr key={index}>
+                                    <td>{order.id}</td>
+                                    <td>{order.items.join(', ')}</td>
+                                    <td>{order.total}</td>
+                                    <td>{order.status}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                <a href="profile" className="btn">Редактировать профиль</a>
-            </div>
-        </div>
-    </main>
-    <Footer />
-    </>
-    )
-}
+            </main>
+            <Footer />
+        </>
+    );
+};
