@@ -29,20 +29,20 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-
 app.post('/register', async (req, res) => {
     const { username, password, email } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
-      const result = await db.query(
-        'INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *',
-        [username, hashedPassword, email]
-      );
-      res.status(201).json(result.rows[0]);
+        const result = await db.query(
+            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *',
+            [username, hashedPassword, email]
+        );
+        res.status(201).json(result.rows[0]);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+        console.error('Error during registration:', err);
+        res.status(500).json({ error: err.message });
     }
-  });
+});
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -53,15 +53,12 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
         const user = result.rows[0];
-        console.log(`Stored Hashed Password: ${user.password}`);
         const validPassword = await bcrypt.compare(password, user.password);
-        console.log(`Password is valid: ${validPassword}`);
         if (!validPassword) {
             console.error('Invalid password for username:', username);
             return res.status(401).json({ error: 'Invalid username or password' });
         }
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        console.log('Generated token:', token);
         res.json({ token });
     } catch (err) {
         console.error('Database query error:', err);
@@ -69,39 +66,33 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/profile', authenticateToken, async (req, res) => {
+app.get('/products/:productId', async (req, res) => {
+    const { productId } = req.params;
     try {
-        console.log('Authenticated user ID:', req.user.userId);
-        const result = await db.query('SELECT username, email, created_at FROM users WHERE id = $1', [req.user.userId]);
+        const result = await db.query('SELECT * FROM products WHERE id = $1', [productId]);
         if (result.rows.length === 0) {
-            console.error('User not found with ID:', req.user.userId);
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ error: 'Product not found' });
         }
-
-        const user = result.rows[0];
-        console.log('User data:', user);
-
-        const ordersResult = await db.query('SELECT * FROM orders WHERE user_id = $1', [req.user.userId]);
-        console.log('Orders data:', ordersResult.rows);
-        const orders = ordersResult.rows;
-
-        const profileData = {
-            username: user.username,
-            email: user.email,
-            created_at: user.created_at,
-            orders: orders.map(order => ({
-                id: order.id,
-                product: order.product,
-                price: order.price,
-                date: order.date
-            }))
-        };
-
-        console.log('Profile data:', profileData);
-        res.json(profileData);
+        res.json(result.rows[0]);
     } catch (err) {
         console.error('Database query error:', err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/cart', authenticateToken, async (req, res) => {
+    const { productId, quantity } = req.body;
+    try {
+        console.log('Request body:', req.body); // Log request body
+        const result = await db.query(
+            'INSERT INTO cart (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *',
+            [req.user.userId, productId, quantity]
+        );
+        console.log('Result:', result.rows[0]); // Log result
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error('Error adding to cart:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

@@ -82,11 +82,11 @@ export default function Profile() {
                     <table className="order-history-table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Date</th>
-                                <th>Items</th>
-                                <th>Total</th>
-                                <th>Status</th>
+                                <th>Номер</th>
+                                <th>Дата</th>
+                                <th>Название</th>
+                                <th>Стоимость</th>
+                                <th>Статус</th>
                             </tr>
                         </thead>
                         <tbody>

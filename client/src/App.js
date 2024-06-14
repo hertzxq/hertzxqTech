@@ -7,6 +7,7 @@ import Register from "./components/register/register"
 import Login from './components/login/login';
 import ProductCard from './components/productCard/productCard';
 import PrivateRoute from './components/login/PrivateRoute';
+import Bin from './components/bin/bin';
 
 export default function App() {
   return (
@@ -20,7 +21,8 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/productCard" element={<ProductCard />} />
+        <Route path="/product/:productId" element={<ProductCard />} />
+        <Route path="/bin" element={<Bin />} />
       </Routes>
     </Router>
     </>

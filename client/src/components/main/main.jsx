@@ -1,86 +1,109 @@
-export default function Main({data}) {
+import React from 'react';
+import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+export default function Main(props) {
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3, // Reduced from 4 to 3
+        slidesToScroll: 1, // Changed to 1 for smoother scrolling
+        centerPadding: '30px', // Added padding between slides
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
     return (
         <main>
-        <div className="intro-section">
-            <div className="intro-content">
-                <h1>Добро пожаловать</h1>
-                <p>Здесь вы найдете все популярные технологии.</p>
-            </div>
-        </div>
-        <div className="products">
-            <h2>Наши товары</h2>
-            <div className="product-cards">
-                <div className="card">
-                    <img src={require('../img/videocard.jpeg')} alt="Videocard" />
-                    <h3>RTX 4090</h3>
-                    <p>Самая мощная видеокарта в мире</p>
-                    <p className="price">149 000 ₽</p>
-                    <a href="./productCard" className="btn">Купить сейчас</a>
-                </div>
-                
-                <div className="card">
-                    <img src={require('../img/videocard.jpeg')} alt="Videocard" />
-                    <h3>RTX 4090</h3>
-                    <p>Самая мощная видеокарта в мире</p>
-                    <p className="price">149 000 ₽</p>
-                    <a href="./productCard" className="btn">Купить сейчас</a>
-                </div>
-                <div className="card">
-                    <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
-                    <h3>Ryzen 9 5800X</h3>
-                    <p>Самая быстрый процессор в мире.</p>
-                    <p className="price">56 800 ₽</p>
-                    <a href="./productCard" className="btn">Купить сейчас</a>
-                </div>
-                <div className="card">
-                    <img src={require('../img/ozu.jpeg')} alt="OZU" />
-                    <h3>SK hynix</h3>
-                    <p>Самая быстрая память в мире.</p>
-                    <p className="price">23 300 ₽</p>
-                    <a href="./productCard" className="btn">Купить сейчас</a>
+            <div className="intro-section">
+                <div className="intro-content">
+                    <h1>{props.Welcome}</h1>
+                    <p>{props.subtitleWelcome}</p>
                 </div>
             </div>
-        </div>
-        <div className="about-us">
-            <div className="about-content">
-                <h2>О нас</h2>
-                <p>Мы — команда энтузиастов, стремящихся сделать технологии доступными для всех. Наша компания основана на принципах качества, инноваций и клиентского удовлетворения. Мы верим, что будущее технологий уже здесь, и наша цель — помочь вам стать его частью.</p>
-                <p>С 2010 года мы предоставляем широкий ассортимент высококачественных продуктов, от самых мощных видеокарт до быстрых процессоров и оперативной памяти. Наши специалисты всегда готовы помочь вам с выбором и предоставить профессиональные консультации.</p>
-                <p>Присоединяйтесь к нам, и вы получите доступ к передовым технологиям и непревзойденному обслуживанию. Вместе мы создадим будущее, о котором вы мечтали.</p>
-            </div>
-        </div>
-
-
-        <div className="news">
-            <div className="news-content">
-                <h2>Новости</h2>
-                <p className="description">Последние обновления и новинки в мире технологий. Будьте в курсе самых важных событий и новостей.</p>
-                <div className="product-cards">
+            <div className="products">
+                <h2>{props.titleProduct}</h2>
+                <Slider {...settings}>
                     <div className="card">
-                        <img src={require('../img/videocard.jpeg')} alt="Videocard" />
-                        <h3>RTX 4090</h3>
-                        <p>Самая мощная видеокарта в мире</p>
-                        <p className="price">149 000 ₽</p>
-                        <a href="./productCard" className="btn">Купить сейчас</a>
+                        <Link to="/product/1"><img src={require('../img/videocard.jpeg')} alt="RTX 4090" /></Link>
+                        <h3>{props.titleCard1}</h3>
+                        <p>{props.subtitletitleCard1}</p>
+                        <p className="price">{props.pricetitleCard1}</p>
+                        <Link to="/product/1" className="btn">{props.sell}</Link>
                     </div>
                     <div className="card">
-                        <img src={require('../img/videocard.jpeg')} alt="Videocard" />
-                        <h3>RTX 4090</h3>
-                        <p>Самая мощная видеокарта в мире</p>
-                        <p className="price">149 000 ₽</p>
-                        <a href="./productCard" className="btn">Купить сейчас</a>
+                        <Link to="/product/2"><img src={require('../img/proccessor.jpeg')} alt="Ryzen 9 5800X" /></Link>
+                        <h3>{props.titleCard2}</h3>
+                        <p>{props.subtitletitleCard2}</p>
+                        <p className="price">{props.pricetitleCard2}</p>
+                        <Link to="/product/2" className="btn">{props.sell}</Link>
                     </div>
-                    
                     <div className="card">
-                        <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
-                        <h3>Ryzen 9 5800X</h3>
-                        <p>Самая быстрый процессор в мире.</p>
-                        <p className="price">56 800 ₽</p>
-                        <a href="./productCard" className="btn">Купить сейчас</a>
+                        <Link to="/product/3"><img src={require('../img/ozu.jpeg')} alt="OZU" /></Link>
+                        <h3>{props.titleCard3}</h3>
+                        <p>{props.subtitletitleCard3}</p>
+                        <p className="price">{props.pricetitleCard3}</p>
+                        <Link to="/product/3" className="btn">Купить сейчас</Link>
                     </div>
+                </Slider>
             </div>
+            <div className="about-us">
+                <div className="about-content">
+                    <h2>{props.titleAboutUs}</h2>
+                    <p>{props.subtitletitleAboutUs1}</p>
+                    <p>{props.subtitletitleAboutUs2}</p>
+                    <p>{props.subtitletitleAboutUs3}</p>
+                </div>
             </div>
-        </div>
-    </main>
-    )
+            <div className="news">
+                <div className="news-content">
+                    <h2>{props.titleNews}</h2>
+                    <p className="description">{props.subtitleNews}</p>
+                    <Slider {...settings}>
+                        <div className="card">
+                            <Link to="/product/1"><img src={require('../img/videocard.jpeg')} alt="RTX 4090" /></Link>
+                            <h3>{props.titleCard1}</h3>
+                            <p>{props.subtitletitleCard1}</p>
+                            <p className="price">{props.pricetitleCard1}</p>
+                            <Link to="/product/1" className="btn">{props.sell}</Link>
+                        </div>
+                        <div className="card">
+                            <Link to="/product/2"><img src={require('../img/proccessor.jpeg')} alt="Ryzen 9 5800X" /></Link>
+                            <h3>{props.titleCard2}</h3>
+                            <p>{props.subtitletitleCard2}</p>
+                            <p className="price">{props.pricetitleCard2}</p>
+                            <Link to="/product/2" className="btn">{props.sell}</Link>
+                        </div>
+                        <div className="card">
+                            <Link to="/product/3"><img src={require('../img/ozu.jpeg')} alt="OZU" /></Link>
+                            <h3>{props.titleCard3}</h3>
+                            <p>{props.subtitletitleCard3}</p>
+                            <p className="price">{props.pricetitleCard3}</p>
+                            <Link to="/product/3" className="btn">{props.sell}</Link>
+                        </div>
+                    </Slider>
+                </div>
+            </div>
+        </main>
+    );
 }

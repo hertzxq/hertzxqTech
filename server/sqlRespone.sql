@@ -1,7 +1,5 @@
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    product VARCHAR(255),
-    price DECIMAL,
-    date TIMESTAMP DEFAULT NOW()
-);
+CREATE DATABASE hertzxqtech
+WITH ENCODING 'UTF8'
+LC_COLLATE='en_US.UTF-8'
+LC_CTYPE='en_US.UTF-8'
+TEMPLATE=template0;

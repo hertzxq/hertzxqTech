@@ -8,6 +8,8 @@ import App from './App';
 import "./components/register/register.css"
 import "./components/register/register.css"
 import "./components/productCard/productCard.css"
+import "./components/bin/bin.css"
+
 
 const root_id = document.getElementById('root')
 const root = ReactDOM.createRoot(root_id);
