@@ -8,7 +8,6 @@ export default function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [username, setUsername] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,8 +55,12 @@ export default function Profile() {
         // Удаляем токен и информацию о пользователе из localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setUsername(null);
         navigate('/');
+    };
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        return new Date(dateString).toLocaleDateString('ru-RU', options);
     };
 
     return (
@@ -93,8 +96,9 @@ export default function Profile() {
                             {profileData.orders && profileData.orders.map((order, index) => (
                                 <tr key={index}>
                                     <td>{order.id}</td>
-                                    <td>{order.items.join(', ')}</td>
-                                    <td>{order.total}</td>
+                                    <td>{formatDate(order.created_at)}</td>
+                                    <td>{order.items.map(item => item.title).join(', ')}</td>
+                                    <td>{order.price} руб.</td>
                                     <td>{order.status}</td>
                                 </tr>
                             ))}

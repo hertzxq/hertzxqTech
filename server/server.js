@@ -6,6 +6,7 @@ const db = require("./db");
 const app = express();
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const productData = require("../client/src/components/datas/productData");
 
 const port = 5000;
 app.use(cors());
@@ -80,20 +81,83 @@ app.get('/products/:productId', async (req, res) => {
     }
 });
 
-app.post('/cart', authenticateToken, async (req, res) => {
+app.post('/cart', authenticateToken, (req, res) => {
     const { productId, quantity } = req.body;
+    console.log('Request body:', req.body); // Логирование запроса
+    const product = productData[productId];
+    if (!product) {
+        console.error('Product not found:', productId); // Логирование ошибки
+        return res.status(404).json({ error: 'Product not found' });
+    }
+
+    console.log('Product added to cart:', product, 'Quantity:', quantity);
+
+    res.status(201).json({ message: 'Product added to cart successfully', product, quantity });
+});
+
+app.post('/order', authenticateToken, async (req, res) => {
+    const { items } = req.body;
+    const userId = req.user.userId;
+    const totalPrice = items.reduce((total, item) => {
+        const itemPrice = parseFloat(item.price);
+        if (isNaN(itemPrice)) {
+            console.error(`Invalid price for item ${item.title}: ${item.price}`);
+            return total;
+        }
+        return total + itemPrice * item.quantity;
+    }, 0);
+
     try {
-        console.log('Request body:', req.body); // Log request body
         const result = await db.query(
-            'INSERT INTO cart (user_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *',
-            [req.user.userId, productId, quantity]
+            'INSERT INTO orders (user_id, items, price, status) VALUES ($1, $2, $3, $4) RETURNING *',
+            [userId, JSON.stringify(items), totalPrice, 'success']
         );
-        console.log('Result:', result.rows[0]); // Log result
         res.status(201).json(result.rows[0]);
     } catch (err) {
-        console.error('Error adding to cart:', err);
+        console.error('Error saving order:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+app.get('/profile', authenticateToken, async (req, res) => {
+    try {
+        console.log('Authenticated user ID:', req.user.userId);
+        const result = await db.query('SELECT username, email, created_at FROM users WHERE id = $1', [req.user.userId]);
+        if (result.rows.length === 0) {
+            console.error('User not found with ID:', req.user.userId);
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const user = result.rows[0];
+        console.log('User data:', user);
+
+        const ordersResult = await db.query('SELECT * FROM orders WHERE user_id = $1', [req.user.userId]);
+        console.log('Orders data:', ordersResult.rows);
+        const orders = ordersResult.rows;
+
+        const profileData = {
+            username: user.username,
+            email: user.email,
+            created_at: user.created_at,
+            orders: orders.map(order => ({
+                id: order.id,
+                items: order.items,
+                price: order.price,
+                created_at: order.created_at,
+                status: order.status,
+            }))
+        };
+
+        console.log('Profile data:', profileData);
+        res.json(profileData);
+    } catch (err) {
+        console.error('Database query error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.use((req, res, next) => {
+    res.status(404).json({ error: 'Not Found' });
 });
 
 app.listen(port, () => {

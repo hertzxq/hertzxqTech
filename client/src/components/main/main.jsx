@@ -1,18 +1,18 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
+
 
 export default function Main(props) {
-
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3, // Reduced from 4 to 3
-        slidesToScroll: 1, // Changed to 1 for smoother scrolling
-        centerPadding: '30px', // Added padding between slides
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        centerPadding: '30px',
         responsive: [
             {
                 breakpoint: 1024,
@@ -45,21 +45,21 @@ export default function Main(props) {
                 <h2>{props.titleProduct}</h2>
                 <Slider {...settings}>
                     <div className="card">
-                        <Link to="/product/1"><img src={require('../img/videocard.jpeg')} alt="RTX 4090" /></Link>
+                        <img src={require('../img/videocard.jpeg')} alt="Videocard" />
                         <h3>{props.titleCard1}</h3>
                         <p>{props.subtitletitleCard1}</p>
                         <p className="price">{props.pricetitleCard1}</p>
                         <Link to="/product/1" className="btn">{props.sell}</Link>
                     </div>
                     <div className="card">
-                        <Link to="/product/2"><img src={require('../img/proccessor.jpeg')} alt="Ryzen 9 5800X" /></Link>
+                        <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
                         <h3>{props.titleCard2}</h3>
                         <p>{props.subtitletitleCard2}</p>
                         <p className="price">{props.pricetitleCard2}</p>
                         <Link to="/product/2" className="btn">{props.sell}</Link>
                     </div>
                     <div className="card">
-                        <Link to="/product/3"><img src={require('../img/ozu.jpeg')} alt="OZU" /></Link>
+                        <img src={require('../img/ozu.jpeg')} alt="Memory" />
                         <h3>{props.titleCard3}</h3>
                         <p>{props.subtitletitleCard3}</p>
                         <p className="price">{props.pricetitleCard3}</p>
@@ -81,21 +81,21 @@ export default function Main(props) {
                     <p className="description">{props.subtitleNews}</p>
                     <Slider {...settings}>
                         <div className="card">
-                            <Link to="/product/1"><img src={require('../img/videocard.jpeg')} alt="RTX 4090" /></Link>
+                            <img src={require('../img/videocard.jpeg')} alt="Videocard" />
                             <h3>{props.titleCard1}</h3>
                             <p>{props.subtitletitleCard1}</p>
                             <p className="price">{props.pricetitleCard1}</p>
                             <Link to="/product/1" className="btn">{props.sell}</Link>
                         </div>
                         <div className="card">
-                            <Link to="/product/2"><img src={require('../img/proccessor.jpeg')} alt="Ryzen 9 5800X" /></Link>
+                            <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
                             <h3>{props.titleCard2}</h3>
                             <p>{props.subtitletitleCard2}</p>
                             <p className="price">{props.pricetitleCard2}</p>
                             <Link to="/product/2" className="btn">{props.sell}</Link>
                         </div>
                         <div className="card">
-                            <Link to="/product/3"><img src={require('../img/ozu.jpeg')} alt="OZU" /></Link>
+                            <img src={require('../img/ozu.jpeg')} alt="Memory" />
                             <h3>{props.titleCard3}</h3>
                             <p>{props.subtitletitleCard3}</p>
                             <p className="price">{props.pricetitleCard3}</p>
