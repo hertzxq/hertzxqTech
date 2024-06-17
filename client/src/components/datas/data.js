@@ -5,6 +5,7 @@ export const data = [
 
         titleProduct: "Наши товары",
         sell: "Купить сейчас",
+        check: "Посмотреть",
 
         titleCard1: "RTX 4090",
         subtitletitleCard1: "Самая мощная видеокарта в мире",

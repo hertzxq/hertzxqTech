@@ -22,7 +22,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/product/:productId" element={<ProductCard />} />
-        <Route path="/bin" element={<Bin />} />
+        <Route element={<PrivateRoute />}>
+            <Route path="/bin" element={<Bin />} />
+        </Route>
       </Routes>
     </Router>
     </>

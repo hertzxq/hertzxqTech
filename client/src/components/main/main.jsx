@@ -85,21 +85,21 @@ export default function Main(props) {
                             <h3>{props.titleCard1}</h3>
                             <p>{props.subtitletitleCard1}</p>
                             <p className="price">{props.pricetitleCard1}</p>
-                            <Link to="/product/1" className="btn">{props.sell}</Link>
+                            <Link to="/product/1" className="btn">{props.check}</Link>
                         </div>
                         <div className="card">
                             <img src={require('../img/proccessor.jpeg')} alt="Proccessor" />
                             <h3>{props.titleCard2}</h3>
                             <p>{props.subtitletitleCard2}</p>
                             <p className="price">{props.pricetitleCard2}</p>
-                            <Link to="/product/2" className="btn">{props.sell}</Link>
+                            <Link to="/product/2" className="btn">{props.check}</Link>
                         </div>
                         <div className="card">
                             <img src={require('../img/ozu.jpeg')} alt="Memory" />
                             <h3>{props.titleCard3}</h3>
                             <p>{props.subtitletitleCard3}</p>
                             <p className="price">{props.pricetitleCard3}</p>
-                            <Link to="/product/3" className="btn">{props.sell}</Link>
+                            <Link to="/product/3" className="btn">{props.check}</Link>
                         </div>
                     </Slider>
                 </div>

@@ -98,3 +98,15 @@
 .cart-checkout-button:hover {
     background-color: #45a049;
 }
+
+.binEmpty {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.binSubtitle {
+    text-align: center;
+    margin-bottom: 100px;
+}

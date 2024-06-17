@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../img/logo.jpeg';
+import binIcon from '../img/bin.png';
+import "./header.css"
 export default function Header(props) {
     const [username, setUsername] = useState(null);
-    const [menuOpen, setMenuOpen] = useState(false); // Состояние для управления видимостью меню
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        // Проверяем, есть ли токен и информация о пользователе в localStorage
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
-        
+
         if (token && user) {
             setUsername(user.username);
         }
@@ -39,12 +40,11 @@ export default function Header(props) {
                     ) : (
                         <li className="profile-header"><Link to="/login">Вход</Link></li>
                     )}
-                    {
-                        username ? (
-                            <li className="profile-bin"><Link to="/bin"><a href="/bin"><img src={require('../img/bin.png')} alt="Ryzen 9 5800X" /></a></Link></li>
-                        ) : (
-                            <li className="profile-bin"><Link to="/"></Link></li>
-                        )}
+                    {username ? (
+                        <li className="profile-bin"><Link to="/bin"><img src={require('../img/bin.png')} alt="Корзина" /></Link></li>
+                    ) : (
+                        <li className="profile-bin"><Link to="/"></Link></li>
+                    )}
                 </ul>
             </div>
         </header>
