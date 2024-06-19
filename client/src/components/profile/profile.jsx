@@ -94,12 +94,12 @@ export default function Profile() {
                         </thead>
                         <tbody>
                             {profileData.orders && profileData.orders.map((order, index) => (
-                                <tr key={index}>
+                                <tr key={index} className='table-profile'>
                                     <td>{order.id}</td>
                                     <td>{formatDate(order.created_at)}</td>
                                     <td>{order.items.map(item => item.title).join(', ')}</td>
-                                    <td>{order.price} руб.</td>
-                                    <td>{order.status}</td>
+                                    <td className='table-price'>{order.price} руб.</td>
+                                    <td className='table-success'>{order.status}</td>
                                 </tr>
                             ))}
                         </tbody>

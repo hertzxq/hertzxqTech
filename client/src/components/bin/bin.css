@@ -110,3 +110,15 @@
     text-align: center;
     margin-bottom: 100px;
 }
+
+@media (max-width: 645px) {
+    .cart-container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 414px) {
+    .cart-container {
+        width: 80%;
+    }
+}

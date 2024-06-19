@@ -123,3 +123,19 @@
     padding: 10px;
     text-align: left;
 }
+
+@media (max-width: 600px) {
+    .product-page {
+        width: 100%;
+        display: block;
+    }
+
+    .product-gallery {
+        width: 100%;
+    }
+
+    .product-details {
+        text-align: center;
+        width: 100%;
+    }
+}

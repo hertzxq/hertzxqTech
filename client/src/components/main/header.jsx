@@ -23,7 +23,7 @@ export default function Header(props) {
     return (
         <header>
             <div className="logo">
-                <Link to="/"><img src={require('../img/logo.jpeg')} alt="logo" /></Link>
+                <Link to="/"><img src={logo} alt="logo" /></Link>
             </div>
             <div className="menu-toggle" onClick={toggleMenu}>
                 <span></span>
@@ -31,7 +31,7 @@ export default function Header(props) {
                 <span></span>
             </div>
             <div className={`links-header ${menuOpen ? 'show' : ''}`}>
-                <ul>
+                <ul className='links-header-ul'>
                     <li className="news-header"><Link to="/">Главная</Link></li>
                     <li className="technologies-header"><Link to="/popularTech">Популярные технологии</Link></li>
                     <li className="profile-header"><Link to="/news">Новости</Link></li>
@@ -41,7 +41,7 @@ export default function Header(props) {
                         <li className="profile-header"><Link to="/login">Вход</Link></li>
                     )}
                     {username ? (
-                        <li className="profile-bin"><Link to="/bin"><img src={require('../img/bin.png')} alt="Корзина" /></Link></li>
+                        <li className="profile-bin"><Link to="/bin"><img src={binIcon} alt="Корзина" /></Link></li>
                     ) : (
                         <li className="profile-bin"><Link to="/"></Link></li>
                     )}

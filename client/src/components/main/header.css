@@ -17,11 +17,13 @@ header {
     height: auto;
 }
 
+
 .links-header ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: left;
 }
 
 .links-header li {
@@ -72,17 +74,6 @@ header {
     }
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) translateX(-50%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) translateX(-50%);
-    }
-}
-
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -100,5 +91,13 @@ header {
 @media (max-width: 768px) {
     .menu-toggle {
         display: flex;
+        margin-left: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        width: 150%;        
+        margin-left: 30px;  
     }
 }

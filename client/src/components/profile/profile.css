@@ -237,3 +237,80 @@ main {
         font-weight: bold;
     }
 }
+
+
+@media (max-width: 768px) {
+
+    .profile-details {
+        width: 100%;
+        display: block;
+    }
+    
+    .profile-avatar {
+        margin: 0;
+    }
+
+    .user-info {
+        margin: 0;
+    }
+
+    .btn_leave {
+        margin: 0 auto;
+    }
+
+    .order-history-table, .order-history-table thead, .order-history-table tbody, .order-history-table th, .order-history-table td, .order-history-table tr {
+        display: block;
+    }
+
+    .order-history-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .order-history-table tr {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+
+    .order-history-table td {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .order-history-table td:before {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        transform: translateY(-50%);
+        font-weight: bold;
+        content: attr(data-label);
+    }
+}
+
+/* Адаптивные стили для экранов шириной до 480 пикселей */
+@media (max-width: 480px) {
+    .order-history-table th, .order-history-table td {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+.table-price {
+    color: green;
+}
+
+.table-profile {
+    font-weight: bold;
+}
+
+.table-success {
+    color: #51895B;
+}
