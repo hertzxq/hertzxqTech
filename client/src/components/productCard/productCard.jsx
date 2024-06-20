@@ -90,7 +90,7 @@ export default function ProductCard() {
                                 <img
                                     key={index}
                                     src={image}
-                                    alt={`${product.title} photo${index + 1}`}
+                                    alt={`${product.title} ${index + 1}`}
                                     onClick={() => handleThumbnailClick(image)}
                                 />
                             ))}
