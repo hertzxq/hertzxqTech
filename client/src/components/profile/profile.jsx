@@ -19,7 +19,7 @@ export default function Profile() {
             }
 
             try {
-                const response = await axios.get('http://localhost:5000/profile', {
+                const response = await axios.get('https://hertzxq-tech-server.vercel.app/profile', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
